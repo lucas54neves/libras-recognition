@@ -23,9 +23,9 @@ def main():
     letter = ""
 
     while run:
-        _, frame = camera.read()
+        sucess, frame = camera.read()
 
-        if frame:
+        if sucess:
             frame = detector.find_hands(frame)
             list_markings = detector.find_position(frame, 0)
 
