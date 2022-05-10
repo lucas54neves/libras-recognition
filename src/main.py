@@ -28,24 +28,25 @@ def main():
     while run:
         _, frame = camera.read()
 
-        frame = detector.find_hands(frame)
-        list_markings = detector.find_position(frame, 0)
+        if frame:
+            frame = detector.find_hands(frame)
+            list_markings = detector.find_position(frame, 0)
 
-        if len(list_markings) > 0:
-            letter = check_letter(list_markings)
+            if len(list_markings) > 0:
+                letter = check_letter(list_markings)
 
-        rectangle(
-            frame,
-            (20, 20),  # Beginning of the rectangle
-            (90, 100),  # End of the rectangle
-            (255, 255, 255),  # Color
-            FILLED,  # cv2.FILLED,
-        )
-        putText(frame, str(letter), (30, 85), FONT_HERSHEY_PLAIN, 5, (255, 0, 0), 5)
+            rectangle(
+                frame,
+                (20, 20),  # Beginning of the rectangle
+                (90, 100),  # End of the rectangle
+                (255, 255, 255),  # Color
+                FILLED,  # cv2.FILLED,
+            )
+            putText(frame, str(letter), (30, 85), FONT_HERSHEY_PLAIN, 5, (255, 0, 0), 5)
 
-        frame = cvtColor(frame, COLOR_BGR2RGB)
+            frame = cvtColor(frame, COLOR_BGR2RGB)
 
-        FRAME_WINDOW.image(frame)
+            FRAME_WINDOW.image(frame)
 
     st.write("Stopped")
 
