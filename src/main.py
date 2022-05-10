@@ -25,27 +25,32 @@ def main():
     while run:
         success, frame = camera.read()
 
-        if success:
-            frame = detector.find_hands(frame)
-            list_markings = detector.find_position(frame, 0)
+        if not success:
+            camera.release()
+            break
 
-            if len(list_markings) > 0:
-                letter = check_letter(list_markings)
+        frame = detector.find_hands(frame)
+        list_markings = detector.find_position(frame, 0)
 
-            rectangle(
-                frame,
-                (20, 20),  # Beginning of the rectangle
-                (90, 100),  # End of the rectangle
-                (255, 255, 255),  # Color
-                FILLED,  # cv2.FILLED,
-            )
-            putText(frame, str(letter), (30, 85), FONT_HERSHEY_PLAIN, 5, (255, 0, 0), 5)
+        if len(list_markings) > 0:
+            letter = check_letter(list_markings)
 
-            frame = cvtColor(frame, COLOR_BGR2RGB)
+        rectangle(
+            frame,
+            (20, 20),  # Beginning of the rectangle
+            (90, 100),  # End of the rectangle
+            (255, 255, 255),  # Color
+            FILLED,  # cv2.FILLED,
+        )
+        putText(frame, str(letter), (30, 85), FONT_HERSHEY_PLAIN, 5, (255, 0, 0), 5)
 
-            FRAME_WINDOW.image(frame)
+        frame = cvtColor(frame, COLOR_BGR2RGB)
 
-    st.write("Stopped")
+        FRAME_WINDOW.image(frame)
+
+    if not run:
+        camera.release()
+        st.write("Stopped")
 
 
 if __name__ == "__main__":
