@@ -20,13 +20,13 @@ def main():
     run = st.checkbox("Run")
     FRAME_WINDOW = st.image([])
     camera = VideoCapture(0)
+    time.sleep(2)
     detector = HandDetector()
 
     letter = ""
 
     while run:
         _, frame = camera.read()
-        time.sleep(2)
 
         frame = detector.find_hands(frame)
         list_markings = detector.find_position(frame, 0)
