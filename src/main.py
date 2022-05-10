@@ -1,3 +1,5 @@
+import time
+
 import streamlit as st
 from cv2 import (
     COLOR_BGR2RGB,
@@ -24,6 +26,7 @@ def main():
 
     while run:
         _, frame = camera.read()
+        time.sleep(2)
 
         frame = detector.find_hands(frame)
         list_markings = detector.find_position(frame, 0)
