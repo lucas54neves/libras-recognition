@@ -5,3 +5,5 @@ pandas==1.4.1
 tornado==6.1
 openpyxl==3.0.9
 click==8.0.4
+opencv-contrib-python==4.5.5.64
+opencv-python==4.5.5.64
