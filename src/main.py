@@ -1,5 +1,3 @@
-import time
-
 import streamlit as st
 from cv2 import (
     COLOR_BGR2RGB,
@@ -20,7 +18,6 @@ def main():
     run = st.checkbox("Run")
     FRAME_WINDOW = st.image([])
     camera = VideoCapture(0)
-    time.sleep(2)
     detector = HandDetector()
 
     letter = ""
